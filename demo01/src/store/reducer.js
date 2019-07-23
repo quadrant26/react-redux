@@ -8,7 +8,7 @@ const defaultState = {
 }
 
 export default (state=defaultState, action) =>{
-    console.log(state, action)
+    // console.log(state, action)
     // Reducer 只能接收state, 不能改变state
     if( action.type === "changeInput"){
         let newState = JSON.parse(JSON.stringify(state)) // 深度拷贝state
@@ -20,6 +20,12 @@ export default (state=defaultState, action) =>{
         let newState = JSON.parse(JSON.stringify(state)) // 深度拷贝state
         newState.list.push(newState.inputValue)
         newState.inputValue = ''
+        return newState
+    }
+
+    if ( action.type === "removeItem"){
+        let newState = JSON.parse(JSON.stringify(state)) // 深度拷贝state
+        newState.list.splice(action.index, 1)
         return newState
     }
     return state
