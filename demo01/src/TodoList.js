@@ -55,8 +55,9 @@ class TodoList extends Component {
     }
 
     clickBtn (e){
-        const action = addItemAction
+        const action = addItemAction()
         store.dispatch(action)
+        console.log(action);
     }
 
     deleteItem (index){
