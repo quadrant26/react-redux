@@ -1,12 +1,8 @@
-import {CHANGE_INPUT, ADD_ITEM, REMOVE_ITEM} from './actionType'
+import {CHANGE_INPUT, ADD_ITEM, REMOVE_ITEM, GET_LIST} from './actionType'
 
 const defaultState = {
     inputValue: 'Write Something',
-    list: [
-        '早8点开晨会，分配今天的开发工作',
-        '早9点和项目经理作开发需求讨论会',
-        '晚5:30对今日代码进行review'
-    ]
+    list: []
 }
 
 export default (state=defaultState, action) =>{
@@ -28,6 +24,12 @@ export default (state=defaultState, action) =>{
     if ( action.type === REMOVE_ITEM){
         let newState = JSON.parse(JSON.stringify(state)) // 深度拷贝state
         newState.list.splice(action.index, 1)
+        return newState
+    }
+
+    if ( action.type === GET_LIST){
+        let newState = JSON.parse(JSON.stringify(state)) // 深度拷贝state
+        newState.list = action.data.list
         return newState
     }
     return state
