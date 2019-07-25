@@ -12,7 +12,7 @@ class TodoList extends Component {
         return (
             <div>
                 <div>
-                    <input type="text" value={this.props.inputValue} onChange={this.inputChange.bind(this)} />
+                    <input type="text" value={this.props.inputValue} onChange={this.props.inputChange} />
                     <button>提交</button>
                 </div>
                 <ul>
@@ -21,10 +21,6 @@ class TodoList extends Component {
             </div>
         );
     }
-
-    // inputChange (e){
-    //     console.log(e.target.value)
-    // }
 }
 
 const stateToProps = (state) => {
@@ -33,12 +29,17 @@ const stateToProps = (state) => {
     }
 }
 
-// const dispatchToProps = (dispatch) => {
-//     return {
-//         inputChange(e){
-//             console.log(e.target.value)
-//         }
-//     }
-// }
+const dispatchToProps = (dispatch) => {
+    return {
+        inputChange(e){
+            console.log(e.target.value)
+            let action = {
+                type: 'change_input',
+                value: e.target.value
+            }
+            dispatch(action)
+        }
+    }
+}
 
-export default connect(stateToProps, null)(TodoList)
+export default connect(stateToProps, dispatchToProps)(TodoList)
