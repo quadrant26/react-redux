@@ -66,3 +66,50 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+# react-redux
+
+# React-redux中的Provider和connect
+
+    <Provider>是一个提供器，只要使用了这个组件，组件里边的其它所有组件都可以使用store了，这也是React-redux的核心组件了
+
+        import { Provider } from 'react-redux'
+        import store from './store'
+        //声明一个App组件，然后这个组件用Provider进行包裹。
+        const App = (
+        <Provider store={store}>
+            <TodoList />
+        </Provider>
+        )
+        //---------关键代码--------end
+        ReactDOM.render(App, document.getElementById('root'));
+    
+    connect连接器的使用
+
+        import {connect} from 'react-redux'  //引入连接器
+
+        export default connect(xxx,null)(TodoList);
+
+    映射关系的制作
+
+        const stateToProps = (state)=>{
+            return {
+                inputValue : state.inputValue
+            }
+        }
+
+        export default connect(stateToProps,null)(TodoList)
+
+        <input value={this.props.inputValue} />
+
+    DispatchToProps
+
+        const dispatchToProps = (dispatch) =>{
+            return {
+                inputChange(e){
+                    console.log(e.target.value)
+                }
+            }
+        }
+
+        export default connect(stateToProps, dispatchToProps)(TodoList)
